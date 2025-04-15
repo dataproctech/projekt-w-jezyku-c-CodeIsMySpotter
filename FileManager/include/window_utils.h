@@ -21,4 +21,8 @@ typedef struct Window {
 // Returns a Window struct containing window properties
 Window create_window_struct(int width, int height, const char* title);
 
+// Function to center the window on the screen
+// It retrieves the monitor information and calculates the position to center the window
+void center_window(Window window);
+
 #endif // WINDOW_UTILS_H

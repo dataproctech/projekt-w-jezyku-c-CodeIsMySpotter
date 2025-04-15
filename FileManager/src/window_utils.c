@@ -33,10 +33,31 @@ Window create_window_struct(int width, int height, const char* title) {
         win.title = NULL;
         win.window = NULL;
     } else {
-        glfwMakeContextCurrent(win.window);
+      center_window(win); // Center the window on the screen
+      glfwMakeContextCurrent(win.window);
     }
-    
+
     return win;
+}
+
+
+// Function is responsible for centering the window on the screen
+// It retrieves the monitor information and calculates the position to center the window
+// The function uses the GLFW library to get the monitor information and set the window position
+// The function takes a Window struct as an argument and sets the window position based on the monitor resolution
+
+void center_window(Window window){
+    int monitor_count;
+    GLFWmonitor** monitors = glfwGetMonitors(&monitor_count);
+    if (monitor_count > 0) {
+        const GLFWvidmode* mode = glfwGetVideoMode(monitors[0]);
+        int x = (mode->width - window.width) / 2;
+        int y = (mode->height - window.height) / 2;
+        glfwSetWindowPos(window.window, x, y);
+    }
+    else {
+        fprintf(stderr, "No monitors found\n");
+    }
 }
 
 

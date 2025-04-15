@@ -17,7 +17,7 @@ int main() {
         return -1;
     }
 
-    Window window = create_window_struct(640, 480, "Hello World");
+    Window window = create_window_struct(1000, 600, "Hello World");
     if (!window.window) {
         return -1;
     }
