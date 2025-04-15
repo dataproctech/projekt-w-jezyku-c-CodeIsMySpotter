@@ -1,58 +1,32 @@
-# include <stdio.h>
-# include <glfw3.h>
-# include <GL/gl.h>
+#include <stdio.h>
+#include <glfw3.h>
+#include <GL/gl.h>
+// Update the path to the correct location of window_utils.h
+#include "window_utils.h"
+#include "glfw_utils.h"
 
 
 
+// Main function is the entry point of the program
+// It initializes GLFW, creates a window, sets up OpenGL, and enters the event loop
+// Finally, it cleans up and terminates GLFW
+// Returns 0 on success, -1 on failure
 
+int main() {
+    if (initialize_glfw() != 0) {
+        return -1;
+    }
 
-int main(){
+    Window window = create_window_struct(640, 480, "Hello World");
+    if (!window.window) {
+        return -1;
+    }
 
-  // Initialize GLFW
-  if (!glfwInit()) {
-    fprintf(stderr, "Failed to initialize GLFW\n");
-    return -1;
-  }
+    setup_opengl();
+    event_loop(window.window);
 
-  // Create a windowed mode window and its OpenGL context
-  GLFWwindow* window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
-  if (!window) {
-    fprintf(stderr, "Failed to create GLFW window\n");
+    printf("Hello, World!\n");
+    glfwDestroyWindow(window.window);
     glfwTerminate();
-    return -1;
-  }
-
-  // Make the window's context current
-  glfwMakeContextCurrent(window);
-  glEnable(GL_DEPTH_TEST); // Enable depth testing for 3D
-  glDepthFunc(GL_LESS); // Accept fragment if it closer to the camera than the former one
-  glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set clear color to black
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear the color and depth buffers
-  glMatrixMode(GL_PROJECTION); // Set the projection matrix
-  glMatrixMode(GL_MODELVIEW); // Set the modelview matrix
-  glLoadIdentity(); // Load the identity matrix
-  glTranslatef(0.0f, 0.0f, -5.0f); // Move the camera back
-
-  // Main loop
-  while (!glfwWindowShouldClose(window)) {
-    // Render here
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear the color and depth buffers
-    glBegin(GL_TRIANGLES); // Start drawing triangles
-    glColor3f(1.0f, 0.0f, 0.0f); // Set color to red
-    glVertex3f(-1.0f, -1.0f, 0.0f); // First vertex
-    glColor3f(0.0f, 1.0f, 0.0f); // Set color to green
-    glVertex3f(1.0f, -1.0f, 0.0f); // Second vertex
-    glColor3f(0.0f, 0.0f, 1.0f); // Set color to blue
-    glVertex3f(0.0f, 1.0f, 0.0f); // Third vertex
-    glEnd(); // End drawing
-
-    // Swap front and back buffers
-    glfwSwapBuffers(window);
-
-    // Poll for and process events
-    glfwPollEvents();
-  }
-
-  printf("Hello, World!\n");
-  return 0;
+    return 0;
 }
