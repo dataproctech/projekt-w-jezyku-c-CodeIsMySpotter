@@ -33,7 +33,7 @@ Window create_window_struct(int width, int height, const char* title) {
         win.title = NULL;
         win.window = NULL;
     } else {
-      center_window(win); // Center the window on the screen
+      center_window(win);
       glfwMakeContextCurrent(win.window);
     }
 

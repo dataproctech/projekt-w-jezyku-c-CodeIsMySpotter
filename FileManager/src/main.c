@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <glfw3.h>
 #include <GL/gl.h>
-// Update the path to the correct location of window_utils.h
 #include "window_utils.h"
 #include "glfw_utils.h"
 
