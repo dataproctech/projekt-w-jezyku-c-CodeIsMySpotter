@@ -3,12 +3,6 @@
 
 
 
-/// @brief Structure to hold the GTK window and its properties
-typedef struct {
-    GtkWidget *window;  // Pointer to the GTK window
-    int width;         // Width of the window
-    int height;        // Height of the window
-} GTKWindow;
 
 GTKWindow *create_window(const char *title, int width, int height) {
     GTKWindow *window = (GTKWindow *)malloc(sizeof(GTKWindow));
