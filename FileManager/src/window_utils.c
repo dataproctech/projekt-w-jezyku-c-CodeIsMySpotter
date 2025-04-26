@@ -10,7 +10,7 @@ GTKWindow *create_window(const char *title, int width, int height) {
         fprintf(stderr, "Failed to allocate memory for window\n");
         return NULL;
     }
-
+    
     window->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(window->window), title);
     gtk_window_set_default_size(GTK_WINDOW(window->window), width, height);
@@ -21,4 +21,4 @@ GTKWindow *create_window(const char *title, int width, int height) {
     g_signal_connect(window->window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 
     return window;
-}
+}   
