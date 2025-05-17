@@ -1,0 +1,56 @@
+
+
+/* 
+  --COLOR_BASE: #1e1e2e;
+  --COLOR_TEXT: #cdd6f4;
+  --COLOR_PINK: #f5c2e7;
+  --COLOR_BLUE: #89b4fa;
+*/
+
+#window-frame {
+  background-color: #1e1e2e;
+  border: 2px solid #f5c2e7;
+  margin: 0;
+  padding: 0;
+}
+
+#navbar {
+  background-color: #1e1e2e;
+  padding: 4px;
+}
+
+
+#minimize-btn, #close-btn {
+    background-color: transparent;
+    background-image: none;
+    box-shadow: none;
+    border-style: none;
+    border-width: 0;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+#minimize-btn:hover, #close-btn:hover {
+    background-color: #f5c2e7;
+}
+
+
+
+#sidebar {
+    padding: 10px;
+}
+
+.sidebar-label {
+    background-color: transparent;
+    color: #cdd6f4; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    font-weight: 500;
+    font-size: 14px;
+    padding: 6px 0;
+}
+
+#sidebar label:hover {
+    color: #d6cbd3; 
+}
