@@ -7,6 +7,7 @@
 
 #include "navbar.h"
 #include "side_bar.h"
+#include "main_content.h"
 
 // Declarations
 
@@ -60,7 +61,7 @@ void create_main_window(GtkWindow *window) {
 
     GtkWidget *sidebar = add_sidebar_to_window(window); 
 
-    GtkWidget *main_area = gtk_label_new("Tutaj główny content");
+    GtkWidget *main_area = create_main_content(window);
     gtk_box_pack_start(GTK_BOX(main_content), main_area, TRUE, TRUE, 0);
 }
 

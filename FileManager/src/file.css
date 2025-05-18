@@ -64,3 +64,19 @@ window, box {
 #sidebar label:hover {
     color: #d6cbd3; 
 }
+
+
+#path-label{
+   background-color: transparent;
+   border: 4px solid #f5c2e7;
+   border-radius: 10px;
+   padding: 20px;
+   margin-bottom: 10px;
+}
+
+#list{
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
