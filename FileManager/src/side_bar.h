@@ -16,23 +16,29 @@ GtkWidget* add_sidebar_to_window(GtkWindow *window) {
     gtk_container_set_border_width(GTK_CONTAINER(sidebar), 10);
 
     // Ikonka folderu
-    GdkPixbuf *folder_icon_pixbuf = gdk_pixbuf_new_from_file_at_size("assets/directoryIcon.png", 16, 16, NULL);
+    GdkPixbuf *folder_icon_pixbuf = gdk_pixbuf_new_from_file_at_size("assets/directoryIcon.png", 24, 24, NULL);
     GtkWidget *folder_icon = gtk_image_new_from_pixbuf(folder_icon_pixbuf);
 
-    // Lista folderów
+    GtkWidget *directories_label = gtk_label_new("System Directories:");
+    gtk_widget_set_name(directories_label, "sidebar-label");
+    gtk_label_set_xalign(GTK_LABEL(directories_label), 0.0); 
+    gtk_widget_set_halign(directories_label, GTK_ALIGN_START);
+    gtk_box_pack_start(GTK_BOX(sidebar), directories_label, FALSE, FALSE, 0);
+
     const char *folder_names[] = { "Desktop", "Downloads", "Documents", NULL };
     for (int i = 0; folder_names[i] != NULL; i++) {
         GtkWidget *hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+        gtk_widget_set_name(hbox, "sidebar-box");
 
         GtkWidget *icon = gtk_image_new_from_pixbuf(folder_icon_pixbuf);
         GtkWidget *label = gtk_label_new(folder_names[i]);
-        GtkStyleContext *context = gtk_widget_get_style_context(label);
-        gtk_style_context_add_class(context, "sidebar-label");
+        gtk_widget_set_name(label, "sidebar-label");
 
         gtk_box_pack_start(GTK_BOX(hbox), icon, FALSE, FALSE, 0);
         gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
         GtkWidget *button = gtk_button_new();
+        gtk_widget_set_name(button, "sidebar-button");
         gtk_container_add(GTK_CONTAINER(button), hbox);
         gtk_box_pack_start(GTK_BOX(sidebar), button, FALSE, FALSE, 0);
     }
@@ -42,17 +48,34 @@ GtkWidget* add_sidebar_to_window(GtkWindow *window) {
     gtk_box_pack_start(GTK_BOX(sidebar), separator, FALSE, FALSE, 10);
 
     // Label "Disks"
+
+    GdkPixbuf *disk_icon_pixbuf = gdk_pixbuf_new_from_file_at_size("assets/DiskIcon.png", 24, 24, NULL);
+    GtkWidget *disk_icon = gtk_image_new_from_pixbuf(disk_icon_pixbuf);
+
     GtkWidget *disks_label = gtk_label_new("Disks:");
+    gtk_widget_set_name(disks_label, "sidebar-label");
+    gtk_label_set_xalign(GTK_LABEL(disks_label), 0.0); 
+    gtk_widget_set_halign(disks_label, GTK_ALIGN_START);
     gtk_box_pack_start(GTK_BOX(sidebar), disks_label, FALSE, FALSE, 0);
 
-    // Sprawdź dostępne dyski
     DWORD drives = GetLogicalDrives();
     for (char letter = 'A'; letter <= 'Z'; ++letter) {
         if (drives & (1 << (letter - 'A'))) {
             char disk_label[4] = { letter, ':', '\\', '\0' };
+            GtkWidget *hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+            gtk_widget_set_name(hbox, "sidebar-box");
 
-            GtkWidget *disk_button = gtk_button_new_with_label(disk_label);
-            gtk_box_pack_start(GTK_BOX(sidebar), disk_button, FALSE, FALSE, 0);
+            GtkWidget *icon = gtk_image_new_from_pixbuf(disk_icon_pixbuf);
+            GtkWidget *label = gtk_label_new(disk_label);
+            gtk_widget_set_name(label, "sidebar-label");
+
+            gtk_box_pack_start(GTK_BOX(hbox), icon, FALSE, FALSE, 0);
+            gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+            GtkWidget *button = gtk_button_new();
+            gtk_widget_set_name(button, "sidebar-button");
+            gtk_container_add(GTK_CONTAINER(button), hbox);
+            gtk_box_pack_start(GTK_BOX(sidebar), button, FALSE, FALSE, 0);
         }
     }
 
