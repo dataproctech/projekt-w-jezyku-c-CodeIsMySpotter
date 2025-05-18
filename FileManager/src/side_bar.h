@@ -1,5 +1,17 @@
 #include <gtk/gtk.h>
-#include <windows.h>  // do GetLogicalDrives()
+#include <windows.h>  
+
+void on_dir_clicked(GtkButton *button, gpointer user_data) {
+    GtkWindow *window = GTK_WINDOW(user_data);
+    const char *folder_name = g_object_get_data(G_OBJECT(button), "folder_name");
+    printf("Folder clicked: %s\n", folder_name);
+}
+
+void on_disk_clicked(GtkButton *button, gpointer user_data) {
+    GtkWindow *window = GTK_WINDOW(user_data);
+    const char *disk_name = g_object_get_data(G_OBJECT(button), "disk_name");
+    printf("Disk clicked: %s\n", disk_name);
+}
 
 GtkWidget* add_sidebar_to_window(GtkWindow *window) {
     GtkWidget *main_content = g_object_get_data(G_OBJECT(window), "main-content");
@@ -37,8 +49,11 @@ GtkWidget* add_sidebar_to_window(GtkWindow *window) {
         gtk_box_pack_start(GTK_BOX(hbox), icon, FALSE, FALSE, 0);
         gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
+
         GtkWidget *button = gtk_button_new();
         gtk_widget_set_name(button, "sidebar-button");
+        g_object_set_data(G_OBJECT(button), "folder_name", folder_names[i]);
+        g_signal_connect(button, "clicked", G_CALLBACK(on_dir_clicked), window);
         gtk_container_add(GTK_CONTAINER(button), hbox);
         gtk_box_pack_start(GTK_BOX(sidebar), button, FALSE, FALSE, 0);
     }
@@ -73,13 +88,15 @@ GtkWidget* add_sidebar_to_window(GtkWindow *window) {
             gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
             GtkWidget *button = gtk_button_new();
+            char *str = g_strdup_printf("%c", letter);
+            g_object_set_data(G_OBJECT(button), "disk_name", str);
+            g_signal_connect(button, "clicked", G_CALLBACK(on_disk_clicked), window);
             gtk_widget_set_name(button, "sidebar-button");
             gtk_container_add(GTK_CONTAINER(button), hbox);
             gtk_box_pack_start(GTK_BOX(sidebar), button, FALSE, FALSE, 0);
         }
     }
 
-    // Dodaj sidebar do main_content (po lewej stronie)
     gtk_box_pack_start(GTK_BOX(main_content), sidebar, FALSE, FALSE, 0);
 
     return sidebar;
