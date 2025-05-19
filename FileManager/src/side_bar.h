@@ -4,14 +4,41 @@
 void on_dir_clicked(GtkButton *button, gpointer user_data) {
     GtkWindow *window = GTK_WINDOW(user_data);
     const char *folder_name = g_object_get_data(G_OBJECT(button), "folder_name");
-    printf("Folder clicked: %s\n", folder_name);
+
+    GtkWidget *path_label = g_object_get_data(G_OBJECT(window), "path-label");
+    const gchar *new_path = NULL;
+
+    if (g_strcmp0(folder_name, "Desktop") == 0) {
+        new_path = g_get_user_special_dir(G_USER_DIRECTORY_DESKTOP);
+    } else if (g_strcmp0(folder_name, "Documents") == 0) {
+        new_path = g_get_user_special_dir(G_USER_DIRECTORY_DOCUMENTS);
+    } else if (g_strcmp0(folder_name, "Downloads") == 0) {
+        new_path = g_get_user_special_dir(G_USER_DIRECTORY_DOWNLOAD);
+    }
+
+    if (new_path != NULL) {
+        g_object_set_data_full(G_OBJECT(window), "path", g_strdup(new_path), g_free);
+        gtk_label_set_text(GTK_LABEL(path_label), new_path);
+        //g_print("Folder clicked: %s\n", new_path);
+    } else {
+        //g_print("Unknown folder name: %s\n", folder_name);
+    }
 }
 
 void on_disk_clicked(GtkButton *button, gpointer user_data) {
     GtkWindow *window = GTK_WINDOW(user_data);
     const char *disk_name = g_object_get_data(G_OBJECT(button), "disk_name");
-    printf("Disk clicked: %s\n", disk_name);
+    
+    char path[4] = { disk_name[0], ':', '/', '\0' };
+
+    g_object_set_data_full(G_OBJECT(window), "path", g_strdup(path), g_free);
+
+    GtkWidget *path_label = g_object_get_data(G_OBJECT(window), "path-label");
+    if (GTK_IS_LABEL(path_label)) {
+        gtk_label_set_text(GTK_LABEL(path_label), path);
+    }
 }
+
 
 GtkWidget* add_sidebar_to_window(GtkWindow *window) {
     GtkWidget *main_content = g_object_get_data(G_OBJECT(window), "main-content");
@@ -74,6 +101,7 @@ GtkWidget* add_sidebar_to_window(GtkWindow *window) {
     gtk_box_pack_start(GTK_BOX(sidebar), disks_label, FALSE, FALSE, 0);
 
     DWORD drives = GetLogicalDrives();
+    int condition = 0;
     for (char letter = 'A'; letter <= 'Z'; ++letter) {
         if (drives & (1 << (letter - 'A'))) {
             char disk_label[4] = { letter, ':', '\\', '\0' };
@@ -94,6 +122,12 @@ GtkWidget* add_sidebar_to_window(GtkWindow *window) {
             gtk_widget_set_name(button, "sidebar-button");
             gtk_container_add(GTK_CONTAINER(button), hbox);
             gtk_box_pack_start(GTK_BOX(sidebar), button, FALSE, FALSE, 0);
+
+            if(condition == 0) {
+                char *path = g_strdup_printf("%c:/", letter);
+                g_object_set_data(G_OBJECT(window), "path", path);
+                condition = 1;
+            }
         }
     }
 

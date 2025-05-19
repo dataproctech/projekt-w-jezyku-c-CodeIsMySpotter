@@ -25,6 +25,9 @@ static inline GtkWindow *create_window(const char *title, int width, int height)
     gtk_window_set_resizable(window, TRUE);
     gtk_window_set_decorated(window, FALSE); 
 
+    g_object_set_data(G_OBJECT(window), "path", g_strdup(""));
+
+
     if (!gtk_window_set_icon_from_file(window, "assets/Icon.png", NULL)) {
         fprintf(stderr, "Warning: Could not load icon.png\n");
     }

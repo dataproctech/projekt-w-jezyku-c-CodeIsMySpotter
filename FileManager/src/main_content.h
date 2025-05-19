@@ -51,8 +51,11 @@ static inline GtkWidget *create_vertical_box(GtkWindow *window) {
 }
 
 static inline GtkWidget *create_path_label(GtkWindow *window) {
-    GtkWidget *path_label = gtk_label_new("Path: /home/user");
+    const char *path = g_object_get_data(G_OBJECT(window), "path");
+    
+    GtkWidget *path_label = gtk_label_new(path);
     gtk_widget_set_name(path_label, "path-label");
+    g_object_set_data(G_OBJECT(window), "path-label", path_label);
 
     return path_label;
 }
