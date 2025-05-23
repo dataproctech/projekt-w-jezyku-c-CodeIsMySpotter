@@ -19,6 +19,7 @@ static inline void show_window(GtkWindow *window);
 
 static inline GtkWindow *create_window(const char *title, int width, int height) {
     GtkWindow *window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
+    gtk_widget_set_name(GTK_WIDGET(window), "main-window");
     gtk_window_set_title(window, title);
     gtk_window_set_default_size(window, width, height);
     gtk_window_set_position(window, GTK_WIN_POS_CENTER);
@@ -48,23 +49,21 @@ static inline GtkWindow *create_window(const char *title, int width, int height)
 }
 
 void create_main_window(GtkWindow *window) {
-    gtk_widget_set_name(GTK_WIDGET(window), "main-window");
-
+    
     GtkWidget *frame = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    gtk_widget_set_name(frame, "window-frame");
     gtk_container_add(GTK_CONTAINER(window), frame);
-
+    
     GtkWidget *navbar = add_navbar_to_window(window);
-    gtk_box_pack_start(GTK_BOX(frame), navbar, FALSE, FALSE, 0);
-
     GtkWidget *main_content = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_box_pack_start(GTK_BOX(frame), main_content, TRUE, TRUE, 0);
-
     g_object_set_data(G_OBJECT(window), "main-content", main_content);
-
     GtkWidget *sidebar = add_sidebar_to_window(window); 
-
     GtkWidget *main_area = create_main_content(window);
+    
+    
+    gtk_widget_set_name(frame, "window-frame");
+
+    gtk_box_pack_start(GTK_BOX(frame), navbar, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(frame), main_content, TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(main_content), main_area, TRUE, TRUE, 0);
 }
 

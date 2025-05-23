@@ -1,6 +1,13 @@
 #include <gtk/gtk.h>
 #include <windows.h>  
 
+
+static inline GtkWidget* add_sidebar_to_window(GtkWindow *window);
+static inline void create_disk_label(GtkWidget *container);
+static inline void on_dir_clicked(GtkButton *button, gpointer user_data);
+static inline void on_disk_clicked(GtkButton *button, gpointer user_data);
+
+
 void on_dir_clicked(GtkButton *button, gpointer user_data) {
     GtkWindow *window = GTK_WINDOW(user_data);
     const char *folder_name = g_object_get_data(G_OBJECT(button), "folder_name");
@@ -54,7 +61,6 @@ GtkWidget* add_sidebar_to_window(GtkWindow *window) {
     gtk_widget_set_hexpand(sidebar, FALSE);
     gtk_container_set_border_width(GTK_CONTAINER(sidebar), 10);
 
-    // Ikonka folderu
     GdkPixbuf *folder_icon_pixbuf = gdk_pixbuf_new_from_file_at_size("assets/directoryIcon.png", 24, 24, NULL);
     GtkWidget *folder_icon = gtk_image_new_from_pixbuf(folder_icon_pixbuf);
 
@@ -85,20 +91,14 @@ GtkWidget* add_sidebar_to_window(GtkWindow *window) {
         gtk_box_pack_start(GTK_BOX(sidebar), button, FALSE, FALSE, 0);
     }
 
-    // Separator
     GtkWidget *separator = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
     gtk_box_pack_start(GTK_BOX(sidebar), separator, FALSE, FALSE, 10);
-
-    // Label "Disks"
 
     GdkPixbuf *disk_icon_pixbuf = gdk_pixbuf_new_from_file_at_size("assets/DiskIcon.png", 24, 24, NULL);
     GtkWidget *disk_icon = gtk_image_new_from_pixbuf(disk_icon_pixbuf);
 
-    GtkWidget *disks_label = gtk_label_new("Disks:");
-    gtk_widget_set_name(disks_label, "sidebar-label");
-    gtk_label_set_xalign(GTK_LABEL(disks_label), 0.0); 
-    gtk_widget_set_halign(disks_label, GTK_ALIGN_START);
-    gtk_box_pack_start(GTK_BOX(sidebar), disks_label, FALSE, FALSE, 0);
+    create_disk_label(sidebar);
+
 
     DWORD drives = GetLogicalDrives();
     int condition = 0;
@@ -134,4 +134,14 @@ GtkWidget* add_sidebar_to_window(GtkWindow *window) {
     gtk_box_pack_start(GTK_BOX(main_content), sidebar, FALSE, FALSE, 0);
 
     return sidebar;
+}
+
+
+
+static inline void create_disk_label(GtkWidget *container){
+    GtkWidget *disks_label = gtk_label_new("Disks:");
+    gtk_widget_set_name(disks_label, "sidebar-label");
+    gtk_label_set_xalign(GTK_LABEL(disks_label), 0.0); 
+    gtk_widget_set_halign(disks_label, GTK_ALIGN_START);
+    gtk_box_pack_start(GTK_BOX(container), disks_label, FALSE, FALSE, 0);
 }
