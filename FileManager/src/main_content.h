@@ -25,14 +25,15 @@ static inline void on_filter_by_clicked(GtkButton *button, gpointer user_data) {
 
 
 static inline GtkWidget *create_main_content(GtkWindow *window) {
+
     GtkWidget *main_content_vertical = create_vertical_box();
     create_path_label(window, main_content_vertical);
     create_toolbar(window, main_content_vertical);
     create_list(main_content_vertical);
     
-    
     return main_content_vertical;
-  }
+}
+
 
 static inline GtkWidget *create_vertical_box() {
     
@@ -48,10 +49,10 @@ static inline GtkWidget *create_vertical_box() {
   
 
 static inline void create_list(GtkWidget *container) {
+
   GtkWidget *scrolled_window = gtk_scrolled_window_new(NULL, NULL);
   gtk_widget_set_name(scrolled_window, "scrolled-window");
   gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-  
   
   GtkWidget *vertical_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_set_name(vertical_box, "list");
@@ -66,7 +67,6 @@ static inline void create_list(GtkWidget *container) {
 static inline void create_toolbar(GtkWindow *window, GtkWidget *container) {
   GtkWidget *toolbar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
   gtk_widget_set_name(toolbar, "toolbar");
-
   gtk_widget_set_hexpand(toolbar, TRUE);
 
   GtkWidget *go_back_btn = gtk_button_new();

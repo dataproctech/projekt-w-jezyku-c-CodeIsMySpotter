@@ -15,7 +15,6 @@ static inline void create_main_window(GtkWindow *window);
 static inline GtkWindow *create_window(const char *title, int width, int height);
 static inline void show_window(GtkWindow *window);
 
-// Function Definitions
 
 static inline GtkWindow *create_window(const char *title, int width, int height) {
     GtkWindow *window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));

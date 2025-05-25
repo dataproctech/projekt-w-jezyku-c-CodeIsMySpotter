@@ -668,7 +668,8 @@ build/main.o: src/main.c C:/msys64/mingw64/include/gtk-3.0/gtk/gtk.h \
  C:/msys64/mingw64/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  C:/msys64/mingw64/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
  C:/msys64/mingw64/include/gtk-3.0/gtk/gtk-autocleanups.h \
- src/main_window.h src/navbar.h src/side_bar.h src/main_content.h
+ src/main_window.h src/navbar.h src/side_bar.h src/main_content.h \
+ src/system_utils.h
 C:/msys64/mingw64/include/gtk-3.0/gtk/gtk.h:
 C:/msys64/mingw64/include/gtk-3.0/gdk/gdk.h:
 C:/msys64/mingw64/include/gtk-3.0/gdk/gdkconfig.h:
@@ -1343,3 +1344,4 @@ src/main_window.h:
 src/navbar.h:
 src/side_bar.h:
 src/main_content.h:
+src/system_utils.h:
