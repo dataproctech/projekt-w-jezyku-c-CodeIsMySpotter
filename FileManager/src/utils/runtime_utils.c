@@ -1,6 +1,5 @@
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+#include "runtime_utils.h"
+#include "system_utils.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,22 +7,9 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <errno.h>
-#include "system_utils.h"
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-typedef struct {
-    List *files;
-    List *folders;
-} DirEntries;
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-static inline Result count_entries_in_dir(const char *path) {
+Result count_entries_in_dir(const char *path) {
     DIR *dir = opendir(path);
     if (!dir) {
         return err("Failed to open directory");
@@ -45,7 +31,7 @@ static inline Result count_entries_in_dir(const char *path) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-static inline Result move_dir(const char *source, const char *destination) {
+Result move_dir(const char *source, const char *destination) {
     if (rename(source, destination) != 0) {
         return err(strerror(errno));
     }
@@ -56,7 +42,7 @@ static inline Result move_dir(const char *source, const char *destination) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-static inline Result delete_dir(const char *path) {
+Result delete_dir(const char *path) {
     if (rmdir(path) != 0) {
         return err(strerror(errno));
     }
@@ -67,7 +53,7 @@ static inline Result delete_dir(const char *path) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-static inline Result delete_file(const char *path) {
+Result delete_file(const char *path) {
     if (remove(path) != 0) {
         return err(strerror(errno));
     }
@@ -77,7 +63,7 @@ static inline Result delete_file(const char *path) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-static inline Result create_dir(const char *path) {
+Result create_dir(const char *path) {
     if (mkdir(path) != 0) {
         return err(strerror(errno));
     }
@@ -87,7 +73,7 @@ static inline Result create_dir(const char *path) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-static inline Result create_file(const char *path) {
+Result create_file(const char *path) {
     FILE *file = fopen(path, "w");
     if (file == NULL) {
         return err(strerror(errno));
@@ -99,7 +85,7 @@ static inline Result create_file(const char *path) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-static inline Result rename_file(const char *old_path, const char *new_path) {
+Result rename_file(const char *old_path, const char *new_path) {
     if (rename(old_path, new_path) != 0) {
         return err(strerror(errno));
     }
@@ -108,58 +94,5 @@ static inline Result rename_file(const char *old_path, const char *new_path) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-static inline Result get_dir_entries(const char *path) {
-    DIR *dir = opendir(path);
-    if (!dir) {
-        return err("Failed to open directory");
-    }
-
-    DirEntries *entries = malloc(sizeof(DirEntries));
-    if (!entries) {
-        closedir(dir);
-        return err("Failed to allocate DirEntries");
-    }
-
-    Result f_list = list_init_result();
-    Result d_list = list_init_result();
-
-    if (f_list.error_code == ERR || d_list.error_code == ERR) {
-        closedir(dir);
-        free(entries);
-        return err("Failed to initialize internal lists");
-    }
-
-    entries->files = f_list.value;
-    entries->folders = d_list.value;
-
-    struct dirent *entry;
-    char full_path[512];
-
-    while ((entry = readdir(dir)) != NULL) {
-        if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) continue;
-
-        snprintf(full_path, sizeof(full_path), "%s/%s", path, entry->d_name);
-
-        struct stat st;
-        if (stat(full_path, &st) == -1) continue;
-
-        char *name_copy = strdup(entry->d_name);
-        if (!name_copy) continue;
-
-        if (S_ISDIR(st.st_mode)) {
-            list_add(entries->folders, name_copy);
-        } else {
-            list_add(entries->files, name_copy);
-        }
-    }
-
-    closedir(dir);
-    return ok(entries, "Directory entries retrieved");
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 

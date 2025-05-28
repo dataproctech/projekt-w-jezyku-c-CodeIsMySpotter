@@ -1,4 +1,5 @@
-build/main.o: src/main.c C:/msys64/mingw64/include/gtk-3.0/gtk/gtk.h \
+build/navbar/navbar_icon.o: src/navbar/navbar_icon.c \
+ src/navbar/navbar_icon.h C:/msys64/mingw64/include/gtk-3.0/gtk/gtk.h \
  C:/msys64/mingw64/include/gtk-3.0/gdk/gdk.h \
  C:/msys64/mingw64/include/gtk-3.0/gdk/gdkconfig.h \
  C:/msys64/mingw64/include/glib-2.0/glib.h \
@@ -667,12 +668,8 @@ build/main.o: src/main.c C:/msys64/mingw64/include/gtk-3.0/gtk/gtk.h \
  C:/msys64/mingw64/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  C:/msys64/mingw64/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  C:/msys64/mingw64/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
- C:/msys64/mingw64/include/gtk-3.0/gtk/gtk-autocleanups.h \
- src/main_window.h src/navbar/navbar.h src/navbar/navbar_btns.h \
- src/navbar/navbar_icon.h src/sidebar/sidebar.h \
- src/sidebar/sidebar_btns.h src/explorer/explorer.h \
- src/explorer/../toolbar/toolbar.h src/explorer/../filelist/filelist.h \
- src/explorer/../pathlabel/pathlabel.h src/utils/system_utils.h
+ C:/msys64/mingw64/include/gtk-3.0/gtk/gtk-autocleanups.h
+src/navbar/navbar_icon.h:
 C:/msys64/mingw64/include/gtk-3.0/gtk/gtk.h:
 C:/msys64/mingw64/include/gtk-3.0/gdk/gdk.h:
 C:/msys64/mingw64/include/gtk-3.0/gdk/gdkconfig.h:
@@ -1343,14 +1340,3 @@ C:/msys64/mingw64/include/gtk-3.0/gtk/deprecated/gtkvscale.h:
 C:/msys64/mingw64/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h:
 C:/msys64/mingw64/include/gtk-3.0/gtk/deprecated/gtkvseparator.h:
 C:/msys64/mingw64/include/gtk-3.0/gtk/gtk-autocleanups.h:
-src/main_window.h:
-src/navbar/navbar.h:
-src/navbar/navbar_btns.h:
-src/navbar/navbar_icon.h:
-src/sidebar/sidebar.h:
-src/sidebar/sidebar_btns.h:
-src/explorer/explorer.h:
-src/explorer/../toolbar/toolbar.h:
-src/explorer/../filelist/filelist.h:
-src/explorer/../pathlabel/pathlabel.h:
-src/utils/system_utils.h:
