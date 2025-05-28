@@ -83,6 +83,12 @@ box {
 }
 
 #toolbar-btn{
+  background-color: #1e1e2e;
+  background-image: none;
+  box-shadow: none;
+  border-width: 0;
+  border-style: none;
+  margin: 0;
   margin: 5px;
 }
 

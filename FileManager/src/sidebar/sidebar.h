@@ -1,6 +1,8 @@
 #include <gtk/gtk.h>
 #include <windows.h>  
 
+#include <sidebar_btns.h>
+
 
 static inline GtkWidget* add_sidebar_to_window(GtkWindow *window);
 static inline void create_disk_label(GtkWidget *container);

@@ -5,9 +5,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "navbar.h"
-#include "side_bar.h"
-#include "main_content.h"
+#include "navbar/navbar.h"
+#include "sidebar/sidebar.h"
+#include "explorer/explorer.h"
 
 // Declarations
 

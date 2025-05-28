@@ -89,7 +89,7 @@ void test_dirs() {
 }
 
 int main(int argc, char *argv[]) {
-    test_dirs();
+    app(argc, argv);   
 
     return 0;
 }
