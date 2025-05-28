@@ -21,8 +21,7 @@ static inline GtkWidget *create_vertical_box();
 
 
 
-static inline GtkWidget *create_main_content(GtkWindow *window)
-{
+static inline GtkWidget *create_main_content(GtkWindow *window) {
 
     GtkWidget *main_content_vertical = create_vertical_box();
     create_path_label(window, main_content_vertical);
@@ -36,8 +35,7 @@ static inline GtkWidget *create_main_content(GtkWindow *window)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-static inline GtkWidget *create_vertical_box()
-{
+static inline GtkWidget *create_vertical_box() {
 
     GtkWidget *vertical_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     gtk_widget_set_name(vertical_box, "vertical-box");

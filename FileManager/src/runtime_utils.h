@@ -13,6 +13,15 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+typedef struct {
+    List *files;
+    List *folders;
+} DirEntries;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 static inline Result count_entries_in_dir(const char *path) {
     DIR *dir = opendir(path);
@@ -42,6 +51,10 @@ static inline Result move_dir(const char *source, const char *destination) {
     }
     return ok(NULL, "Directory moved successfully");
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 static inline Result delete_dir(const char *path) {
     if (rmdir(path) != 0) {
@@ -95,3 +108,58 @@ static inline Result rename_file(const char *old_path, const char *new_path) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+static inline Result get_dir_entries(const char *path) {
+    DIR *dir = opendir(path);
+    if (!dir) {
+        return err("Failed to open directory");
+    }
+
+    DirEntries *entries = malloc(sizeof(DirEntries));
+    if (!entries) {
+        closedir(dir);
+        return err("Failed to allocate DirEntries");
+    }
+
+    Result f_list = list_init_result();
+    Result d_list = list_init_result();
+
+    if (f_list.error_code == ERR || d_list.error_code == ERR) {
+        closedir(dir);
+        free(entries);
+        return err("Failed to initialize internal lists");
+    }
+
+    entries->files = f_list.value;
+    entries->folders = d_list.value;
+
+    struct dirent *entry;
+    char full_path[512];
+
+    while ((entry = readdir(dir)) != NULL) {
+        if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) continue;
+
+        snprintf(full_path, sizeof(full_path), "%s/%s", path, entry->d_name);
+
+        struct stat st;
+        if (stat(full_path, &st) == -1) continue;
+
+        char *name_copy = strdup(entry->d_name);
+        if (!name_copy) continue;
+
+        if (S_ISDIR(st.st_mode)) {
+            list_add(entries->folders, name_copy);
+        } else {
+            list_add(entries->files, name_copy);
+        }
+    }
+
+    closedir(dir);
+    return ok(entries, "Directory entries retrieved");
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+

@@ -27,7 +27,7 @@ static inline void on_filter_by_clicked(GtkButton *button, gpointer user_data)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 static inline void create_go_back_btn(GtkWidget *container) {
-    GdkPixbuf *go_back_icon = gdk_pixbuf_new_from_file_at_scale("assets/GoBack.png", 40, 40, TRUE, NULL);
+    GdkPixbuf *go_back_icon = gdk_pixbuf_new_from_file_a  t_scale("assets/GoBack.png", 40, 40, TRUE, NULL);
     GtkWidget *go_back_image = gtk_image_new_from_pixbuf(go_back_icon);
     GtkWidget *go_back_btn = gtk_button_new();
     gtk_button_set_image(GTK_BUTTON(go_back_btn), go_back_image);

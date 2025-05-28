@@ -1,10 +1,10 @@
 #include <gtk/gtk.h>
+#include "../runtime_utils.h"
 
 static inline void create_list(GtkWidget *container);
 
 
-static inline void create_list(GtkWidget *container)
-{
+static inline void create_list(GtkWidget *container) {
 
     GtkWidget *scrolled_window = gtk_scrolled_window_new(NULL, NULL);
     gtk_widget_set_name(scrolled_window, "scrolled-window");
@@ -15,4 +15,9 @@ static inline void create_list(GtkWidget *container)
 
     gtk_container_add(GTK_CONTAINER(scrolled_window), vertical_box);
     gtk_box_pack_start(GTK_BOX(container), scrolled_window, TRUE, TRUE, 0);
+}
+
+static inline void create_entries(GtkWidget *list_container) {
+    
+
 }
