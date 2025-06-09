@@ -98,3 +98,17 @@ box {
   padding: 20px;
   margin-bottom: 20px;
 }
+
+
+#entry-button{
+  background-color: #1e1e2e;
+  background-image: none;
+  box-shadow: none;
+  border-radius: 10px;
+  border: 2px solid #f5c2e7;
+  margin: 0;
+  margin: 1px;
+  color: #cdd6f4;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+}

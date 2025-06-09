@@ -1,5 +1,6 @@
-build/navbar/navbar_btns.o: src/navbar/navbar_btns.c \
- src/navbar/navbar_btns.h \
+build/sidebar/sidebar.o: src/sidebar/sidebar.c \
+ src/sidebar/../utils/runtime_utils.h src/sidebar/../utils/system_utils.h \
+ src/sidebar/../utils/system_utils.h src/sidebar/../filelist/filelist.h \
  D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/gtk.h \
  D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gdk/gdk.h \
  D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gdk/gdkconfig.h \
@@ -669,8 +670,13 @@ build/navbar/navbar_btns.o: src/navbar/navbar_btns.c \
  D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
- D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/gtk-autocleanups.h
-src/navbar/navbar_btns.h:
+ D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/gtk-autocleanups.h \
+ src/sidebar/sidebar_btns.h src/sidebar/sidebar.h \
+ src/sidebar/sidebar_btns.h
+src/sidebar/../utils/runtime_utils.h:
+src/sidebar/../utils/system_utils.h:
+src/sidebar/../utils/system_utils.h:
+src/sidebar/../filelist/filelist.h:
 D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/gtk.h:
 D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gdk/gdk.h:
 D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gdk/gdkconfig.h:
@@ -1341,3 +1347,6 @@ D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/deprecated/gtkvsca
 D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h:
 D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/deprecated/gtkvseparator.h:
 D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/gtk-autocleanups.h:
+src/sidebar/sidebar_btns.h:
+src/sidebar/sidebar.h:
+src/sidebar/sidebar_btns.h:

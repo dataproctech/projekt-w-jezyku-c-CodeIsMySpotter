@@ -96,3 +96,42 @@ Result rename_file(const char *old_path, const char *new_path) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+Result list_dir(const char *path) {
+    DIR *dir = opendir(path);
+    if (!dir) {
+        return err("Could not open directory");
+    }
+
+    Result res = list_init();
+    if (res.error_code == ERR) {
+        closedir(dir);
+        return err("Could not initialize list");
+    }
+
+    List *file_list = (List *)res.value;
+
+    struct dirent *entry;
+    while ((entry = readdir(dir)) != NULL) {
+        // Pomijamy "." i ".."
+        if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0)
+            continue;
+
+        char *name_copy = strdup(entry->d_name);
+        if (!name_copy) {
+            list_deinit(file_list, free);  // Zwalniamy listę i zawartość
+            closedir(dir);
+            return err("Failed to allocate memory for file name");
+        }
+
+        Result add_res = list_add(file_list, name_copy);
+        if (add_res.error_code == ERR) {
+            free(name_copy);
+            list_deinit(file_list, free);
+            closedir(dir);
+            return err("Failed to add file name to list");
+        }
+    }
+
+    closedir(dir);
+    return ok(file_list, "Directory read successfully");
+}

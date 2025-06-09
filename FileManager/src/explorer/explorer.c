@@ -15,7 +15,7 @@ GtkWidget *create_main_content(GtkWindow *window) {
     GtkWidget *main_content_vertical = create_vertical_box();
     create_path_label(window, main_content_vertical);
     create_toolbar(window, main_content_vertical);
-    create_list(main_content_vertical);
+    create_list(main_content_vertical, window);
 
     return main_content_vertical;
 }

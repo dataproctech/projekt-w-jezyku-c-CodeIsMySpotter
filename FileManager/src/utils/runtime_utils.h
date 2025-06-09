@@ -22,4 +22,4 @@ Result delete_file(const char *path);
 Result create_dir(const char *path);
 Result create_file(const char *path);
 Result rename_file(const char *old_path, const char *new_path);
-
+Result list_dir(const char *path);
