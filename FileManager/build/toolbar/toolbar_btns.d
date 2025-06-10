@@ -669,7 +669,9 @@ build/toolbar/toolbar_btns.o: src/toolbar/toolbar_btns.c \
  D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
- D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/gtk-autocleanups.h
+ D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/gtk-autocleanups.h \
+ src/toolbar/../filelist/filelist.h src/toolbar/../utils/runtime_utils.h \
+ src/toolbar/../utils/system_utils.h src/toolbar/../utils/system_utils.h
 src/toolbar/toolbar_btns.h:
 D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/gtk.h:
 D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gdk/gdk.h:
@@ -1341,3 +1343,7 @@ D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/deprecated/gtkvsca
 D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h:
 D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/deprecated/gtkvseparator.h:
 D:/IT/SCOOP/apps/msys2/2024-07-27/mingw64/include/gtk-3.0/gtk/gtk-autocleanups.h:
+src/toolbar/../filelist/filelist.h:
+src/toolbar/../utils/runtime_utils.h:
+src/toolbar/../utils/system_utils.h:
+src/toolbar/../utils/system_utils.h:

@@ -43,10 +43,47 @@ Result move_dir(const char *source, const char *destination) {
 
 
 Result delete_dir(const char *path) {
+    DIR *dir = opendir(path);
+    if (!dir) {
+        return err(strerror(errno));
+    }
+
+    struct dirent *entry;
+    char full_path[1024];
+
+    while ((entry = readdir(dir)) != NULL) {
+        if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0)
+            continue;
+
+        snprintf(full_path, sizeof(full_path), "%s/%s", path, entry->d_name);
+
+        struct stat statbuf;
+        if (stat(full_path, &statbuf) == -1) {
+            closedir(dir);
+            return err(strerror(errno));
+        }
+
+        if (S_ISDIR(statbuf.st_mode)) {
+            Result res = delete_dir(full_path);
+            if (res.error_code == ERR) {
+                closedir(dir);
+                return res;
+            }
+        } else {
+            if (remove(full_path) != 0) {
+                closedir(dir);
+                return err(strerror(errno));
+            }
+        }
+    }
+
+    closedir(dir);
+
     if (rmdir(path) != 0) {
         return err(strerror(errno));
     }
-    return ok(NULL, "Directory deleted successfully");
+
+    return ok(NULL, "Directory and contents deleted successfully");
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

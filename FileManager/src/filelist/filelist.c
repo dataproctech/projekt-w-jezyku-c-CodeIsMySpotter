@@ -31,7 +31,7 @@ void update_filelist(gpointer user_data){
 
         gboolean is_file = strchr(filename, '.') != NULL;
 
-        GtkWidget *button = create_entry_button(filename, is_file);
+        GtkWidget *button = create_entry_button(filename, is_file, window);
 
 
 
@@ -48,6 +48,7 @@ void create_list(GtkWidget *container, GtkWindow *window) {
     GtkWidget *scrolled_window = gtk_scrolled_window_new(NULL, NULL);
     gtk_widget_set_name(scrolled_window, "scrolled-window");
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+
 
     GtkWidget *vertical_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     gtk_widget_set_name(vertical_box, "list");
