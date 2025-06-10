@@ -130,7 +130,7 @@ GtkWidget* add_sidebar_to_window(GtkWindow *window) {
 
 
     DWORD drives = GetLogicalDrives();
-    int condition = 0;
+
     for (char letter = 'A'; letter <= 'Z'; ++letter) {
         if (drives & (1 << (letter - 'A'))) {
             char disk_label[4] = { letter, ':', '\\', '\0' };
@@ -152,11 +152,7 @@ GtkWidget* add_sidebar_to_window(GtkWindow *window) {
             gtk_container_add(GTK_CONTAINER(button), hbox);
             gtk_box_pack_start(GTK_BOX(sidebar), button, FALSE, FALSE, 0);
 
-            if(condition == 0) {
-                char *path = g_strdup_printf("%c:/", letter);
-                g_object_set_data(G_OBJECT(window), "path", path);
-                condition = 1;
-            }
+
         }
     }
 

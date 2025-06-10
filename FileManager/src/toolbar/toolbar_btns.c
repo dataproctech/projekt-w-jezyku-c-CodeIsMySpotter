@@ -126,7 +126,7 @@ void on_create_new_folder_clicked(GtkButton *button, gpointer user_data)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void on_filter_by_clicked(GtkButton *button, gpointer user_data)
+void on_sort_by_clicked(GtkButton *button, gpointer user_data)
 {
     // Implement the functionality for filtering
 }
@@ -165,13 +165,13 @@ void create_create_new_folder_btn(GtkWidget *container, GtkWindow *window) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-void create_filter_by_btn(GtkWidget *container) {
-    GdkPixbuf *filter_by_icon = gdk_pixbuf_new_from_file_at_scale("assets/FilterBy.png", 40, 40, TRUE, NULL);
-    GtkWidget *filter_by_btn = gtk_button_new();
-    gtk_button_set_image(GTK_BUTTON(filter_by_btn), gtk_image_new_from_pixbuf(filter_by_icon));
-    gtk_widget_set_name(filter_by_btn, "toolbar-btn");
-    gtk_box_pack_start(GTK_BOX(container), filter_by_btn, FALSE, FALSE, 0);
-    g_object_unref(filter_by_icon);
+void create_sort_btn(GtkWidget *container) {
+    GdkPixbuf *sort_icon = gdk_pixbuf_new_from_file_at_scale("assets/FilterBy.png", 40, 40, TRUE, NULL);
+    GtkWidget *sort_btn = gtk_button_new();
+    gtk_button_set_image(GTK_BUTTON(sort_btn), gtk_image_new_from_pixbuf(sort_icon));
+    gtk_widget_set_name(sort_btn, "toolbar-btn");
+    gtk_box_pack_start(GTK_BOX(container), sort_btn, FALSE, FALSE, 0);
+    g_object_unref(sort_icon);
 }
 
 

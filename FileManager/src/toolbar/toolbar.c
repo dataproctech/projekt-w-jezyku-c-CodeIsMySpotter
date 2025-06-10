@@ -10,8 +10,8 @@ void create_toolbar(GtkWindow *window, GtkWidget *container)
 
     create_go_back_btn(toolbar, window);
     create_create_new_folder_btn(toolbar, window);
-    create_filter_by_btn(toolbar);
-    create_find_btn(toolbar);
+    //create_sort_btn(toolbar);
+    //create_find_btn(toolbar);
 
     gtk_box_pack_start(GTK_BOX(container), toolbar, FALSE, FALSE, 0);
 }
